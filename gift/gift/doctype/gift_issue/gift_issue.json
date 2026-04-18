@@ -1,0 +1,493 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:GIFT-ISSUE-{#####}",
+ "creation": "2025-09-18 18:19:11.605570",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "gift",
+  "gift_name",
+  "column_break_gntq",
+  "date",
+  "status",
+  "category",
+  "approval_section",
+  "approval_status",
+  "approved_by",
+  "column_break_approval",
+  "approved_on",
+  "rejection_reason",
+  "owner_details_section",
+  "gift_recipient",
+  "column_break_owner",
+  "guest_name",
+  "event",
+  "event_name",
+  "section_break_dispatch",
+  "delivery_method",
+  "dispatch_date",
+  "column_break_dispatch_method",
+  "dispatch_type",
+  "tracking_number",
+  "section_break_transport",
+  "transport_mode",
+  "transport_company",
+  "vehicle_number",
+  "estimated_arrival",
+  "transport_details_section",
+  "driver_name",
+  "driver_contact",
+  "delivery_person_section",
+  "delivery_person_name",
+  "delivery_person_contact",
+  "column_break_delivery",
+  "delivery_person_id",
+  "delivery_person_company",
+  "delivery_address",
+  "delivery_section",
+  "delivery_description",
+  "delivery_date",
+  "column_break_delivery_conf",
+  "actual_delivery_time",
+  "recipient_details_section",
+  "received_by_type",
+  "received_by_name",
+  "column_break_recipient",
+  "column_break_ntef",
+  "receiver_id",
+  "receiver_contact",
+  "receiver_relationship",
+  "delivery_remarks",
+  "return_section",
+  "is_returned",
+  "return_date",
+  "column_break_return",
+  "return_reason",
+  "return_handled_by",
+  "documents_section",
+  "documents",
+  "from_gift_interest"
+ ],
+ "fields": [
+  {
+   "fieldname": "gift",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Gift",
+   "options": "Gift",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_gntq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nIn Transit\nDelivered\nReturned\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "approval_section",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "default": "Awaiting Approval",
+   "fieldname": "approval_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Approval Status",
+   "options": "Awaiting Approval\nApproved\nRejected",
+   "reqd": 1
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_approval",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_on",
+   "fieldtype": "Datetime",
+   "label": "Approved On",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.approval_status=='Rejected'",
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason"
+  },
+  {
+   "fieldname": "owner_details_section",
+   "fieldtype": "Section Break",
+   "label": "Owner Details"
+  },
+  {
+   "fieldname": "gift_recipient",
+   "fieldtype": "Link",
+   "label": "Gift Recipient",
+   "options": "Gift Recipient",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_owner",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.status=='Delivered'",
+   "fieldname": "delivery_section",
+   "fieldtype": "Section Break",
+   "label": "Delivery Confirmation"
+  },
+  {
+   "depends_on": "eval:doc.status=='Delivered'",
+   "fieldname": "delivery_description",
+   "fieldtype": "Small Text",
+   "label": "Delivery Description"
+  },
+  {
+   "depends_on": "eval:doc.status=='Delivered'",
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "label": "Actual Delivery Date"
+  },
+  {
+   "fieldname": "column_break_delivery_conf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.status=='Delivered'",
+   "fieldname": "actual_delivery_time",
+   "fieldtype": "Time",
+   "label": "Actual Delivery Time"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method!=''",
+   "fieldname": "recipient_details_section",
+   "fieldtype": "Section Break",
+   "label": "Recipient Details (Who Received the Gift)"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method!=''",
+   "fieldname": "received_by_type",
+   "fieldtype": "Select",
+   "label": "Received By Type",
+   "options": "\nGuest (VIP)\nFamily Member\nRepresentative\nCoordinator\nOther"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method!=''",
+   "fieldname": "received_by_name",
+   "fieldtype": "Data",
+   "label": "Receiver Full Name"
+  },
+  {
+   "fieldname": "column_break_recipient",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method!=''",
+   "fieldname": "receiver_id",
+   "fieldtype": "Data",
+   "label": "Receiver Emirates ID/Passport"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method!=''",
+   "fieldname": "receiver_contact",
+   "fieldtype": "Data",
+   "label": "Receiver Contact Number"
+  },
+  {
+   "depends_on": "eval:doc.status=='Delivered' && doc.received_by_type!='Guest (VIP)'",
+   "description": "e.g., Personal Coordinator, Executive Assistant, Family Member",
+   "fieldname": "receiver_relationship",
+   "fieldtype": "Data",
+   "label": "Relationship to Guest"
+  },
+  {
+   "depends_on": "eval:doc.status=='Delivered'",
+   "fieldname": "delivery_remarks",
+   "fieldtype": "Small Text",
+   "label": "Delivery Remarks"
+  },
+  {
+   "fieldname": "return_section",
+   "fieldtype": "Section Break",
+   "label": "Return Information"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_returned",
+   "fieldtype": "Check",
+   "label": "Is Returned"
+  },
+  {
+   "depends_on": "eval:doc.is_returned==1",
+   "fieldname": "return_date",
+   "fieldtype": "Datetime",
+   "label": "Return Date"
+  },
+  {
+   "fieldname": "column_break_return",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.is_returned==1",
+   "fieldname": "return_reason",
+   "fieldtype": "Small Text",
+   "label": "Return Reason"
+  },
+  {
+   "depends_on": "eval:doc.is_returned==1",
+   "fieldname": "return_handled_by",
+   "fieldtype": "Link",
+   "label": "Return Handled By",
+   "options": "User"
+  },
+  {
+   "fieldname": "documents_section",
+   "fieldtype": "Section Break",
+   "label": "Documents"
+  },
+  {
+   "fieldname": "documents",
+   "fieldtype": "Table",
+   "label": "Documents",
+   "options": "Gift Issue Documents"
+  },
+  {
+   "fetch_from": "gift.gift_name",
+   "fetch_if_empty": 1,
+   "fieldname": "gift_name",
+   "fieldtype": "Read Only",
+   "label": "Gift Name"
+  },
+  {
+   "fetch_from": "gift.category",
+   "fetch_if_empty": 1,
+   "fieldname": "category",
+   "fieldtype": "Read Only",
+   "label": "Category"
+  },
+  {
+   "fieldname": "event",
+   "fieldtype": "Link",
+   "label": "Related Event",
+   "options": "Gift Event"
+  },
+  {
+   "fetch_from": "event.subject",
+   "fieldname": "event_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_dispatch",
+   "fieldtype": "Section Break",
+   "label": "Dispatch & Delivery Method"
+  },
+  {
+   "fieldname": "delivery_method",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Delivery Method",
+   "options": "\nDirect Handover\nTransport\nCourier"
+  },
+  {
+   "fieldname": "dispatch_date",
+   "fieldtype": "Datetime",
+   "label": "Dispatch Date"
+  },
+  {
+   "fieldname": "column_break_dispatch_method",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Direct Handover'",
+   "fieldname": "dispatch_type",
+   "fieldtype": "Select",
+   "label": "Handover Type",
+   "options": "\nIn-Person\nAt Event\nAt Office"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Courier'",
+   "fieldname": "tracking_number",
+   "fieldtype": "Data",
+   "label": "Tracking Number"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Transport' || doc.delivery_method=='Courier'",
+   "fieldname": "section_break_transport",
+   "fieldtype": "Section Break",
+   "label": "Transport Details"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Transport' || doc.delivery_method=='Courier'",
+   "fieldname": "transport_mode",
+   "fieldtype": "Select",
+   "label": "Transport Mode",
+   "options": "\nCompany Vehicle\nThird Party Courier\nAir Transport\nSea Freight"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Transport'",
+   "fieldname": "transport_company",
+   "fieldtype": "Data",
+   "label": "Transport Company"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Transport' && doc.transport_mode=='Company Vehicle'",
+   "fieldname": "vehicle_number",
+   "fieldtype": "Data",
+   "label": "Vehicle Number"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Transport' || doc.delivery_method=='Courier'",
+   "fieldname": "estimated_arrival",
+   "fieldtype": "Datetime",
+   "label": "Estimated Arrival"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Transport'",
+   "fieldname": "transport_details_section",
+   "fieldtype": "Section Break",
+   "label": "Driver/Handler Details"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Transport'",
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver/Handler Name"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Transport'",
+   "fieldname": "driver_contact",
+   "fieldtype": "Data",
+   "label": "Driver Contact"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Direct Handover'",
+   "fieldname": "delivery_person_section",
+   "fieldtype": "Section Break",
+   "label": "Handover Person Details (Who Handed Over)"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Direct Handover'",
+   "fieldname": "delivery_person_name",
+   "fieldtype": "Data",
+   "label": "Handover Person Name"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Direct Handover'",
+   "fieldname": "delivery_person_contact",
+   "fieldtype": "Data",
+   "label": "Handover Person Contact"
+  },
+  {
+   "fieldname": "column_break_delivery",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Direct Handover'",
+   "fieldname": "delivery_person_id",
+   "fieldtype": "Data",
+   "label": "Handover Person ID/Emirates ID"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Direct Handover'",
+   "fieldname": "delivery_person_company",
+   "fieldtype": "Data",
+   "label": "Company/Organization"
+  },
+  {
+   "depends_on": "eval:doc.delivery_method=='Transport' || doc.delivery_method=='Courier'",
+   "fieldname": "delivery_address",
+   "fieldtype": "Small Text",
+   "label": "Delivery Address"
+  },
+  {
+   "fetch_from": "gift_recipient.owner_full_name",
+   "fieldname": "guest_name",
+   "fieldtype": "Data",
+   "label": "Guest Name"
+  },
+  {
+   "fieldname": "from_gift_interest",
+   "fieldtype": "Link",
+   "label": "From Gift Interest",
+   "options": "Gift Interest"
+  },
+  {
+   "fieldname": "column_break_ntef",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-09 10:10:12.189562",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Gift Issue",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Coordinator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,344 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:GD-{YYYY}-{#####}",
+ "creation": "2025-12-18 15:14:35.030649",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "related_gift_issue",
+  "dispatch_date",
+  "column_break_1",
+  "dispatch_type",
+  "tracking_number",
+  "dispatch_status",
+  "event",
+  "event_name",
+  "gift_details_section",
+  "gift",
+  "gift_name",
+  "column_break_2",
+  "gift_recipient",
+  "owner_full_name",
+  "delivery_destination_section",
+  "delivery_address",
+  "transport_section",
+  "transport_mode",
+  "vehicle_number",
+  "column_break_4",
+  "driver_name",
+  "driver_contact",
+  "timing_section",
+  "estimated_arrival",
+  "column_break_timing",
+  "actual_delivery_date",
+  "return_handling_section",
+  "return_reason",
+  "return_handled_on",
+  "delivery_person_section",
+  "delivery_person_name",
+  "delivery_person_contact",
+  "column_break_delivery",
+  "delivery_person_id",
+  "delivery_person_company",
+  "delivery_confirmation_section",
+  "received_by_name",
+  "receiver_id",
+  "column_break_6",
+  "delivery_remarks",
+  "documents_section",
+  "dispatch_documents"
+ ],
+ "fields": [
+  {
+   "default": "now",
+   "fieldname": "dispatch_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Dispatch Date",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "related_gift_issue.gift",
+   "fieldname": "gift",
+   "fieldtype": "Link",
+   "label": "Gift",
+   "options": "Gift",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "related_gift_issue.gift_name",
+   "fieldname": "gift_name",
+   "fieldtype": "Data",
+   "label": "Gift Name",
+   "read_only": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "dispatch_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Dispatch Status",
+   "options": "Pending\nDispatched\nFailed\nReturned",
+   "reqd": 1
+  },
+  {
+   "fieldname": "event",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Event",
+   "options": "Gift Event",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "event.subject",
+   "fieldname": "event_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "dispatch_type",
+   "fieldtype": "Select",
+   "label": "Dispatch Type",
+   "options": "Internal\nHand-over\nCourier"
+  },
+  {
+   "depends_on": "eval:doc.dispatch_type==\"Courier\"",
+   "fieldname": "tracking_number",
+   "fieldtype": "Data",
+   "label": "Tracking Number"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "related_gift_issue",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Gift Issue",
+   "options": "Gift Issue",
+   "reqd": 1
+  },
+  {
+   "fieldname": "transport_section",
+   "fieldtype": "Section Break",
+   "label": "Transport Details"
+  },
+  {
+   "fieldname": "transport_mode",
+   "fieldtype": "Select",
+   "label": "Transport Mode",
+   "options": "\nCompany Vehicle\nThird Party Courier\nAir Transport\nSelf Pickup"
+  },
+  {
+   "fieldname": "vehicle_number",
+   "fieldtype": "Data",
+   "label": "Vehicle Number"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver/Handler Name"
+  },
+  {
+   "fieldname": "driver_contact",
+   "fieldtype": "Data",
+   "label": "Driver Contact"
+  },
+  {
+   "fieldname": "timing_section",
+   "fieldtype": "Section Break",
+   "label": "Timing"
+  },
+  {
+   "fieldname": "estimated_arrival",
+   "fieldtype": "Datetime",
+   "label": "Estimated Arrival"
+  },
+  {
+   "fieldname": "actual_delivery_date",
+   "fieldtype": "Datetime",
+   "label": "Actual Delivery Date"
+  },
+  {
+   "depends_on": "eval:doc.dispatch_status==\"Failed\" || doc.dispatch_status==\"Returned\"",
+   "fieldname": "return_handling_section",
+   "fieldtype": "Section Break",
+   "label": "Return Handling"
+  },
+  {
+   "depends_on": "eval:doc.dispatch_status==\"Failed\" || doc.dispatch_status==\"Returned\"",
+   "fieldname": "return_reason",
+   "fieldtype": "Small Text",
+   "label": "Return Reason"
+  },
+  {
+   "depends_on": "eval:doc.dispatch_status==\"Failed\" || doc.dispatch_status==\"Returned\"",
+   "fieldname": "return_handled_on",
+   "fieldtype": "Datetime",
+   "label": "Return Handled On"
+  },
+  {
+   "fieldname": "documents_section",
+   "fieldtype": "Section Break",
+   "label": "Documents"
+  },
+  {
+   "fieldname": "received_by_name",
+   "fieldtype": "Data",
+   "label": "Received By Name"
+  },
+  {
+   "fieldname": "receiver_id",
+   "fieldtype": "Data",
+   "label": "Receiver Emirates ID"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "delivery_remarks",
+   "fieldtype": "Small Text",
+   "label": "Delivery Remarks"
+  },
+  {
+   "fieldname": "dispatch_documents",
+   "fieldtype": "Table",
+   "label": "Dispatch Documents",
+   "options": "Gift Issue Documents"
+  },
+  {
+   "fieldname": "gift_details_section",
+   "fieldtype": "Section Break",
+   "label": "Gift Details"
+  },
+  {
+   "fetch_from": "related_gift_issue.gift_recipient",
+   "fieldname": "gift_recipient",
+   "fieldtype": "Link",
+   "label": "Gift Recipient",
+   "options": "Gift Recipient",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "gift_recipient.owner_full_name",
+   "fieldname": "owner_full_name",
+   "fieldtype": "Data",
+   "label": "Recipient Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_destination_section",
+   "fieldtype": "Section Break",
+   "label": "Delivery Destination"
+  },
+  {
+   "fieldname": "delivery_address",
+   "fieldtype": "Small Text",
+   "label": "Delivery Address"
+  },
+  {
+   "fieldname": "column_break_timing",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "delivery_person_section",
+   "fieldtype": "Section Break",
+   "label": "Delivery Person Details"
+  },
+  {
+   "fieldname": "delivery_person_name",
+   "fieldtype": "Data",
+   "label": "Delivery Person Name"
+  },
+  {
+   "fieldname": "delivery_person_contact",
+   "fieldtype": "Data",
+   "label": "Delivery Person Contact"
+  },
+  {
+   "fieldname": "column_break_delivery",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "delivery_person_id",
+   "fieldtype": "Data",
+   "label": "Delivery Person ID/Emirates ID"
+  },
+  {
+   "fieldname": "delivery_person_company",
+   "fieldtype": "Data",
+   "label": "Company/Organization"
+  },
+  {
+   "fieldname": "delivery_confirmation_section",
+   "fieldtype": "Section Break",
+   "label": "Delivery Confirmation"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-16 01:42:11.489237",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Gift Dispatch",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Coordinator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,280 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:GIFT-RCP-{#####}",
+ "creation": "2025-09-22 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "owner_full_name",
+  "section_break_coordinator",
+  "coordinator_full_name",
+  "coordinator_mobile_no",
+  "coordinator_first_name",
+  "coordinator_last_name",
+  "column_break_coordinator",
+  "coordinator_email",
+  "coordinator_emirates_id",
+  "section_break_contact",
+  "address",
+  "column_break_photo",
+  "person_photo",
+  "preferred_contact_method",
+  "vip_level",
+  "event_assignment_section",
+  "event",
+  "event_name",
+  "column_break_event",
+  "assigned_coordinator",
+  "coordinator_name",
+  "blocked",
+  "is_active",
+  "section_break_documents",
+  "recipient_documents",
+  "salutation",
+  "guest_first_name",
+  "guest_last_name",
+  "section_break_contact_info",
+  "guest_nationality",
+  "column_break_location",
+  "guest_country"
+ ],
+ "fields": [
+  {
+   "fieldname": "owner_full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Owner Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_coordinator",
+   "fieldtype": "Section Break",
+   "label": "Coordinator Information (Mandatory for VIP Guests)"
+  },
+  {
+   "fieldname": "coordinator_full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Coordinator Full Name"
+  },
+  {
+   "fieldname": "coordinator_mobile_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Coordinator Mobile No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_coordinator",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "coordinator_email",
+   "fieldtype": "Data",
+   "label": "Coordinator Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "coordinator_emirates_id",
+   "fieldtype": "Data",
+   "label": "Coordinator Emirates ID"
+  },
+  {
+   "fieldname": "section_break_contact",
+   "fieldtype": "Section Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "column_break_photo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "person_photo",
+   "fieldtype": "Attach",
+   "label": "Person Photo"
+  },
+  {
+   "fieldname": "event_assignment_section",
+   "fieldtype": "Section Break",
+   "label": "Event Assignment"
+  },
+  {
+   "description": "Which event is this guest registered for",
+   "fieldname": "event",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Event",
+   "options": "Gift Event"
+  },
+  {
+   "fetch_from": "event.subject",
+   "fieldname": "event_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_event",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Event Coordinator managing this guest",
+   "fieldname": "assigned_coordinator",
+   "fieldtype": "Link",
+   "label": "Assigned Coordinator",
+   "options": "User"
+  },
+  {
+   "fetch_from": "assigned_coordinator.full_name",
+   "fieldname": "coordinator_name",
+   "fieldtype": "Data",
+   "label": "Coordinator Name",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "blocked",
+   "fieldtype": "Check",
+   "label": "Blocked"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "section_break_documents",
+   "fieldtype": "Section Break",
+   "label": "Documents"
+  },
+  {
+   "fieldname": "recipient_documents",
+   "fieldtype": "Table",
+   "label": "Documents",
+   "options": "Gift Issue Documents"
+  },
+  {
+   "fieldname": "salutation",
+   "fieldtype": "Link",
+   "label": "Salutation",
+   "options": "Salutation"
+  },
+  {
+   "fieldname": "guest_first_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Guest First Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "guest_last_name",
+   "fieldtype": "Data",
+   "label": "Guest Last Name"
+  },
+  {
+   "fieldname": "section_break_contact_info",
+   "fieldtype": "Section Break",
+   "label": "Contact Information"
+  },
+  {
+   "fieldname": "guest_nationality",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Guest Nationality",
+   "options": "Country"
+  },
+  {
+   "fieldname": "guest_country",
+   "fieldtype": "Link",
+   "label": "Guest Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "column_break_location",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vip_level",
+   "fieldtype": "Data",
+   "label": "VIP Level"
+  },
+  {
+   "fieldname": "preferred_contact_method",
+   "fieldtype": "Select",
+   "label": "Preferred contact method",
+   "options": "\nEmail\nPhone"
+  },
+  {
+   "fieldname": "coordinator_first_name",
+   "fieldtype": "Data",
+   "label": "Coordinator First Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "coordinator_last_name",
+   "fieldtype": "Data",
+   "label": "Coordinator Last Name"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-01 22:42:54.230387",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Gift Recipient",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Coordinator",
+   "share": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "owner_full_name",
+ "track_changes": 1
+}

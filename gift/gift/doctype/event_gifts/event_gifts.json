@@ -1,0 +1,68 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-18 15:11:28.390249",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "gift",
+  "gift_name",
+  "category",
+  "display_status",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "gift",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Gift",
+   "options": "Gift",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "gift.gift_name",
+   "fieldname": "gift_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Gift Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "gift.category",
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "Gift Category",
+   "read_only": 1
+  },
+  {
+   "default": "On Display",
+   "fieldname": "display_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Display Status",
+   "options": "On Display\nReserved\nDistributed\nIn Storage\nNot Available"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-18 15:11:28.390249",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Event Gifts",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

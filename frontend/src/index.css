@@ -1,0 +1,484 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+	:root {
+		/* Backgrounds - Grey instead of pure white */
+		--background: 220 14% 96%;
+		--foreground: 222.2 84% 4.9%;
+
+		/* Cards - Grey with shadows */
+		--card: 0 0% 100%;
+		--card-foreground: 222.2 84% 4.9%;
+		/* Sidebar */
+
+		--popover: 0 0% 100%;
+		--popover-foreground: 222.2 84% 4.9%;
+
+		--primary: 0, 1%, 40%; /* gold-brown */
+		--primary-foreground: 210 40% 98%; /* light text on top */
+		/* Secondary Actions - Navy colors */
+		--secondary: 220 40% 15%;
+		--secondary-foreground: 210 40% 98%;
+
+		--muted: 220 14% 92%;
+		--muted-foreground: 215.4 16.3% 46.9%;
+
+		--accent: 38 60% 60%;
+		--accent-foreground: 210 40% 98%;
+
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 210 40% 98%;
+
+		--border: 220 13% 91%;
+		--input: 220 13% 91%;
+		--ring: 38 60% 60%;
+
+		/* More rounded corners */
+		--radius: 0.75rem;
+
+		/* Increased base font sizes */
+		--font-size-base: 16px;
+		--font-size-lg: 18px;
+		--font-size-xl: 20px;
+		--font-size-2xl: 24px;
+		--font-size-3xl: 30px;
+
+		/* Colorful Sidebar */
+		--sidebar-background: 0, 0%, 88%;
+		--sidebar-foreground: 215 28% 17%;
+		--sidebar-primary: 38 60% 60%;
+		--sidebar-primary-foreground: 210 40% 98%;
+		--sidebar-accent: 220 40% 25%;
+		--sidebar-accent-foreground: 210 40% 98%;
+		--sidebar-border: 220 40% 20%;
+		--sidebar-ring: 38 60% 60%;
+	}
+
+	.dark {
+		--background: 222.2 84% 4.9%;
+		--foreground: 210 40% 98%;
+
+		--card: 217.2 32.6% 17.5%;
+		--card-foreground: 210 40% 98%;
+
+		--popover: 217.2 32.6% 17.5%;
+		--popover-foreground: 210 40% 98%;
+
+		--primary: 38 60% 60%;
+		--primary-foreground: 222.2 47.4% 11.2%;
+
+		--secondary: 217.2 32.6% 25%;
+		--secondary-foreground: 210 40% 98%;
+
+		--muted: 217.2 32.6% 17.5%;
+		--muted-foreground: 215 20.2% 65.1%;
+
+		--accent: 38 60% 60%;
+		--accent-foreground: 210 40% 98%;
+
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 210 40% 98%;
+
+		--border: 217.2 32.6% 17.5%;
+		--input: 217.2 32.6% 17.5%;
+		--ring: 38 60% 60%;
+
+		--sidebar-background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+		--sidebar-foreground: 240 4.8% 95.9%;
+		--sidebar-primary: 38 60% 60%;
+		--sidebar-primary-foreground: 0 0% 100%;
+		--sidebar-accent: 240 3.7% 25%;
+		--sidebar-accent-foreground: 240 4.8% 95.9%;
+		--sidebar-border: 240 3.7% 15.9%;
+		--sidebar-ring: 38 60% 60%;
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	html,
+	body {
+		height: 100%;
+	}
+
+	body {
+		@apply bg-background text-foreground;
+		font-feature-settings:
+			"rlig" 1,
+			"calt" 1;
+		font-size: var(--font-size-base); /* Increased from 14px to 16px */
+		font-family: "Inter", system-ui, sans-serif;
+	}
+
+	/* Increased font sizes for sidebar and navigation */
+	.sidebar {
+		font-size: 18px !important;
+	}
+
+	.sidebar-nav-item {
+		font-size: 16px !important;
+		padding: 12px 16px !important;
+	}
+
+	.sidebar-nav-item span {
+		font-size: 16px !important;
+	}
+
+	/* Increase table header and content font sizes */
+	.table-header {
+		font-size: 15px !important;
+	}
+
+	td,
+	th {
+		font-size: 14px !important;
+	}
+
+	/* Increase form font sizes */
+	.form-label {
+		font-size: 15px !important;
+	}
+
+	input,
+	select,
+	textarea {
+		font-size: 15px !important;
+	}
+
+	/* Increase button font sizes */
+	button {
+		font-size: 15px ;
+	}
+
+	/* Increase card title and content font sizes */
+	.card-title {
+		font-size: 18px !important;
+	}
+
+	.card-content {
+		font-size: 15px !important;
+	}
+
+	/* Increase dashboard card font sizes */
+	.dashboard-card {
+		font-size: 16px !important;
+	}
+
+	.dashboard-card-title {
+		font-size: 18px !important;
+	}
+
+	.dashboard-card-value {
+		font-size: 24px !important;
+	}
+}
+
+@layer utilities {
+	/* Additional utilities can go here */
+}
+
+.dark .table-header {
+	@apply bg-slate-800 border-b-slate-700 text-slate-300;
+}
+
+/* Buttons with hover effects and shadows */
+.btn-primary {
+	@apply bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg transition-all duration-200 rounded-lg;
+}
+
+.btn-secondary {
+	@apply bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md transition-all duration-200 rounded-lg;
+}
+
+.btn-outline {
+	@apply border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground hover:shadow-md transition-all duration-200 rounded-lg;
+}
+
+.btn-ghost {
+	@apply hover:bg-muted hover:shadow-sm transition-all duration-200 rounded-lg;
+}
+
+/* Cards with shadows and rounded corners */
+.card {
+	@apply bg-card text-card-foreground rounded-xl shadow-md border border-border;
+}
+
+.card-hover {
+	@apply hover:shadow-lg transition-shadow duration-200;
+}
+
+/* Enhanced inputs with focus states */
+.input-enhanced {
+	@apply rounded-lg border border-input bg-background px-4 py-2 text-sm ring-offset-background transition-all duration-200;
+}
+
+.input-enhanced:focus {
+	@apply ring-2 ring-primary ring-offset-2;
+}
+
+/* Sidebar enhancements */
+.sidebar-gradient {
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+}
+
+.sidebar-item {
+	@apply rounded-lg transition-all duration-200 ;
+}
+
+.sidebar-item-active {
+	@apply bg-sidebar-primary text-sidebar-primary-foreground shadow-md;
+}
+
+/* Status indicators with semantic colors */
+.status-success {
+	@apply bg-green-500 text-white;
+}
+
+.status-warning {
+	@apply bg-yellow-500 text-black;
+}
+
+.status-error {
+	@apply bg-red-500 text-white;
+}
+
+.status-info {
+	@apply bg-blue-500 text-white;
+}
+
+/* Enhanced spacing system */
+.spacing-tight {
+	@apply space-y-2;
+}
+
+.spacing-normal {
+	@apply space-y-4;
+}
+
+.spacing-loose {
+	@apply space-y-6;
+}
+
+/* Typography scale */
+.text-display {
+	@apply text-3xl font-bold;
+}
+
+.text-heading {
+	@apply text-xl font-semibold;
+}
+
+.text-subheading {
+	@apply text-lg font-medium;
+}
+
+.text-body {
+	@apply text-sm font-normal;
+}
+
+.text-caption {
+	@apply text-xs font-normal;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+	text-align: right;
+}
+
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+	--tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .ml-2 {
+	margin-left: 0;
+	margin-right: 0.5rem;
+}
+[dir="rtl"] .ml-3 {
+	margin-left: 0;
+	margin-right: 0.75rem;
+}
+[dir="rtl"] .ml-4 {
+	margin-left: 0;
+	margin-right: 1rem;
+}
+[dir="rtl"] .ml-16 {
+	margin-left: 0;
+	margin-right: 4rem;
+}
+[dir="rtl"] .ml-64 {
+	margin-left: 0;
+	margin-right: 16rem;
+}
+[dir="rtl"] .mr-2 {
+	margin-right: 0;
+	margin-left: 0.5rem;
+}
+[dir="rtl"] .mr-3 {
+	margin-right: 0;
+	margin-left: 0.75rem;
+}
+[dir="rtl"] .mr-4 {
+	margin-right: 0;
+	margin-left: 1rem;
+}
+
+[dir="rtl"] .pl-8 {
+	padding-left: 0;
+	padding-right: 2rem;
+}
+[dir="rtl"] .pl-2 {
+	padding-left: 0;
+	padding-right: 0.5rem;
+}
+[dir="rtl"] .pl-3 {
+	padding-left: 0;
+	padding-right: 0.75rem;
+}
+[dir="rtl"] .pl-4 {
+	padding-left: 0;
+	padding-right: 1rem;
+}
+[dir="rtl"] .pr-2 {
+	padding-right: 0;
+	padding-left: 0.5rem;
+}
+[dir="rtl"] .pr-3 {
+	padding-right: 0;
+	padding-left: 0.75rem;
+}
+[dir="rtl"] .pr-4 {
+	padding-right: 0;
+	padding-left: 1rem;
+}
+[dir="rtl"] .pr-10 {
+	padding-right: 0;
+	padding-left: 2.5rem;
+}
+
+[dir="rtl"] .left-0 {
+	left: auto;
+	right: 0;
+}
+[dir="rtl"] .right-0 {
+	right: auto;
+	left: 0;
+}
+[dir="rtl"] .left-2 {
+	left: auto;
+	right: 0.5rem;
+}
+[dir="rtl"] .right-2 {
+	right: auto;
+	left: 0.5rem;
+}
+[dir="rtl"] .right-3 {
+	right: auto;
+	left: 0.75rem;
+}
+[dir="rtl"] .right-4 {
+	right: auto;
+	left: 1rem;
+}
+
+[dir="rtl"] .border-l-2 {
+	border-left-width: 0;
+	border-right-width: 2px;
+}
+[dir="rtl"] .border-l {
+	border-left-width: 0;
+	border-right-width: 1px;
+}
+[dir="rtl"] .border-r {
+	border-right-width: 0;
+	border-left-width: 1px;
+}
+[dir="rtl"] .-left-3 {
+	left: auto;
+	right: -0.75rem;
+}
+
+/* RTL Flexbox fixes */
+[dir="rtl"] .flex-row-reverse {
+	flex-direction: row-reverse;
+}
+
+[dir="rtl"] .justify-start {
+	justify-content: flex-end;
+}
+
+[dir="rtl"] .justify-end {
+	justify-content: flex-start;
+}
+
+/* RTL Text alignment for components */
+[dir="rtl"] .text-left {
+	text-align: right;
+}
+
+[dir="rtl"] .text-right {
+	text-align: left;
+}
+
+/* RTL Icon flipping */
+[dir="rtl"] .rotate-180 {
+	transform: rotate(180deg);
+}
+
+/* RTL specific fixes for common patterns */
+[dir="rtl"] .absolute.inset-y-0.left-0 {
+	left: auto;
+	right: 0;
+}
+
+[dir="rtl"] .absolute.inset-y-0.right-0 {
+	right: auto;
+	left: 0;
+}
+
+@supports (-webkit-touch-callout: none) {
+	:root {
+		--safe-top: env(safe-area-inset-top);
+		--safe-right: env(safe-area-inset-right);
+		--safe-bottom: env(safe-area-inset-bottom);
+		--safe-left: env(safe-area-inset-left);
+	}
+
+	input,
+	select,
+	textarea {
+		font-size: 16px !important;
+	}
+
+	body {
+		-webkit-text-size-adjust: 100%;
+	}
+}
+
+.safe-area-px {
+	padding-left: var(--safe-left, 0px);
+	padding-right: var(--safe-right, 0px);
+}
+
+.safe-area-pt {
+	padding-top: var(--safe-top, 0px);
+}
+
+.safe-area-pb {
+	padding-bottom: var(--safe-bottom, 0px);
+}
+
+.safe-area-fab-br {
+	bottom: calc(1rem + var(--safe-bottom, 0px));
+	right: calc(1rem + var(--safe-right, 0px));
+}

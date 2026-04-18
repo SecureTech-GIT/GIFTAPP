@@ -1,0 +1,479 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "GEV.#####",
+ "creation": "2025-12-31 13:32:22.418818",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "email_append_to": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "details",
+  "subject",
+  "event_owner",
+  "event_coordinator",
+  "event_category",
+  "event_type",
+  "color",
+  "send_reminder",
+  "repeat_this_event",
+  "column_break_4",
+  "starts_on",
+  "ends_on",
+  "status",
+  "event_location_section",
+  "address_line_1",
+  "address_line_2",
+  "city",
+  "state",
+  "postal_code",
+  "country",
+  "sender",
+  "all_day",
+  "sync_with_google_calendar",
+  "add_video_conferencing",
+  "sb_00",
+  "google_calendar_id",
+  "cb_00",
+  "google_calendar_event_id",
+  "google_meet_link",
+  "pulled_from_google_calendar",
+  "section_break_13",
+  "repeat_on",
+  "repeat_till",
+  "column_break_16",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+  "section_break_8",
+  "description",
+  "event_team_section",
+  "event_managers",
+  "event_coordinators",
+  "column_break_team_stats",
+  "total_team_count",
+  "manager_count",
+  "coordinator_count",
+  "event_categories_section",
+  "event_categories",
+  "column_break_inventory",
+  "event_gifts",
+  "participants",
+  "event_participants"
+ ],
+ "fields": [
+  {
+   "fieldname": "details",
+   "fieldtype": "Section Break",
+   "label": "Details",
+   "oldfieldtype": "Section Break"
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Small Text",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Subject",
+   "reqd": 1
+  },
+  {
+   "fieldname": "event_owner",
+   "fieldtype": "Link",
+   "label": "Event Owner",
+   "options": "User"
+  },
+  {
+   "fieldname": "event_coordinator",
+   "fieldtype": "Link",
+   "label": "Event Coordinator",
+   "options": "User"
+  },
+  {
+   "fieldname": "event_category",
+   "fieldtype": "Select",
+   "label": "Event Category",
+   "options": "Event\nMeeting\nCall\nSent/Received Email\nOther"
+  },
+  {
+   "fieldname": "event_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Event Type",
+   "oldfieldname": "event_type",
+   "oldfieldtype": "Select",
+   "options": "Private\nPublic",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "color",
+   "fieldtype": "Color",
+   "label": "Color"
+  },
+  {
+   "default": "1",
+   "fieldname": "send_reminder",
+   "fieldtype": "Check",
+   "label": "Send an email reminder in the morning"
+  },
+  {
+   "default": "0",
+   "fieldname": "repeat_this_event",
+   "fieldtype": "Check",
+   "label": "Repeat this Event"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "starts_on",
+   "fieldtype": "Datetime",
+   "label": "Starts on",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ends_on",
+   "fieldtype": "Datetime",
+   "label": "Ends on"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Draft\nPlanned\nActive\nCompleted\nCancelled"
+  },
+  {
+   "fieldname": "event_location_section",
+   "fieldtype": "Section Break",
+   "label": "Event Location"
+  },
+  {
+   "fieldname": "address_line_1",
+   "fieldtype": "Data",
+   "label": "Address Line 1"
+  },
+  {
+   "fieldname": "address_line_2",
+   "fieldtype": "Data",
+   "label": "Address Line 2"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State/Province"
+  },
+  {
+   "fieldname": "postal_code",
+   "fieldtype": "Data",
+   "label": "Postal Code"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "sender",
+   "fieldtype": "Data",
+   "label": "Sender",
+   "options": "Email",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "all_day",
+   "fieldtype": "Check",
+   "label": "All Day"
+  },
+  {
+   "default": "0",
+   "fieldname": "sync_with_google_calendar",
+   "fieldtype": "Check",
+   "label": "Sync with Google Calendar"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.sync_with_google_calendar",
+   "description": "via Google Meet",
+   "fieldname": "add_video_conferencing",
+   "fieldtype": "Check",
+   "label": "Add Video Conferencing"
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.sync_with_google_calendar || doc.pulled_from_google_calendar",
+   "fieldname": "sb_00",
+   "fieldtype": "Section Break",
+   "label": "Google Calendar"
+  },
+  {
+   "fetch_from": "google_calendar.google_calendar_id",
+   "fieldname": "google_calendar_id",
+   "fieldtype": "Data",
+   "label": "Google Calendar ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_00",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "google_calendar_event_id",
+   "fieldtype": "Data",
+   "label": "Google Calendar Event ID",
+   "length": 320,
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "google_meet_link",
+   "fieldtype": "Small Text",
+   "label": "Google Meet Link",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "pulled_from_google_calendar",
+   "fieldtype": "Check",
+   "label": "Pulled from Google Calendar",
+   "read_only": 1
+  },
+  {
+   "depends_on": "repeat_this_event",
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "repeat_this_event",
+   "fieldname": "repeat_on",
+   "fieldtype": "Select",
+   "in_global_search": 1,
+   "label": "Repeat On",
+   "options": "\nDaily\nWeekly\nMonthly\nYearly"
+  },
+  {
+   "depends_on": "repeat_this_event",
+   "description": "Leave blank to repeat always",
+   "fieldname": "repeat_till",
+   "fieldtype": "Date",
+   "label": "Repeat Till"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.repeat_this_event && doc.repeat_on===\"Weekly\"",
+   "fieldname": "monday",
+   "fieldtype": "Check",
+   "label": "Monday"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.repeat_this_event && doc.repeat_on===\"Weekly\"",
+   "fieldname": "tuesday",
+   "fieldtype": "Check",
+   "label": "Tuesday"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.repeat_this_event && doc.repeat_on===\"Weekly\"",
+   "fieldname": "wednesday",
+   "fieldtype": "Check",
+   "label": "Wednesday"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.repeat_this_event && doc.repeat_on===\"Weekly\"",
+   "fieldname": "thursday",
+   "fieldtype": "Check",
+   "label": "Thursday"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.repeat_this_event && doc.repeat_on===\"Weekly\"",
+   "fieldname": "friday",
+   "fieldtype": "Check",
+   "label": "Friday"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.repeat_this_event && doc.repeat_on===\"Weekly\"",
+   "fieldname": "saturday",
+   "fieldtype": "Check",
+   "label": "Saturday"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.repeat_this_event && doc.repeat_on===\"Weekly\"",
+   "fieldname": "sunday",
+   "fieldtype": "Check",
+   "label": "Sunday"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "in_global_search": 1,
+   "label": "Description",
+   "oldfieldname": "description",
+   "oldfieldtype": "Text",
+   "print_width": "300px",
+   "width": "300px"
+  },
+  {
+   "description": "Assign Event Managers and Coordinators who can access this event's data",
+   "fieldname": "event_team_section",
+   "fieldtype": "Section Break",
+   "label": "Event Team"
+  },
+  {
+   "description": "Event Managers for this event",
+   "fieldname": "event_managers",
+   "fieldtype": "Table",
+   "label": "Event Managers",
+   "options": "Event Team Member"
+  },
+  {
+   "description": "Event Coordinators for this event",
+   "fieldname": "event_coordinators",
+   "fieldtype": "Table",
+   "label": "Event Coordinators",
+   "options": "Event Team Member"
+  },
+  {
+   "fieldname": "column_break_team_stats",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_team_count",
+   "fieldtype": "Int",
+   "label": "Total Team Members",
+   "read_only": 1
+  },
+  {
+   "fieldname": "manager_count",
+   "fieldtype": "Int",
+   "label": "Managers",
+   "read_only": 1
+  },
+  {
+   "fieldname": "coordinator_count",
+   "fieldtype": "Int",
+   "label": "Coordinators",
+   "read_only": 1
+  },
+  {
+   "description": "Select which gift categories are available for this event",
+   "fieldname": "event_categories_section",
+   "fieldtype": "Section Break",
+   "label": "Event Categories & Gifts"
+  },
+  {
+   "description": "Gift categories guests can choose from at this event",
+   "fieldname": "event_categories",
+   "fieldtype": "Table",
+   "label": "Available Categories",
+   "options": "Event Category Selection"
+  },
+  {
+   "fieldname": "column_break_inventory",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Specific gifts assigned to this event",
+   "fieldname": "event_gifts",
+   "fieldtype": "Table",
+   "label": "Event Gift Inventory",
+   "options": "Event Gifts"
+  },
+  {
+   "fieldname": "participants",
+   "fieldtype": "Section Break",
+   "label": "Participants",
+   "oldfieldtype": "Section Break"
+  },
+  {
+   "fieldname": "event_participants",
+   "fieldtype": "Table",
+   "label": "Event Participants",
+   "options": "Event Participants"
+  }
+ ],
+ "grid_page_length": 50,
+ "icon": "fa fa-calendar",
+ "links": [],
+ "modified": "2026-04-01 22:42:21.079905",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Gift Event",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Coordinator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sender_field": "sender",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "subject_field": "subject",
+ "title_field": "subject",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

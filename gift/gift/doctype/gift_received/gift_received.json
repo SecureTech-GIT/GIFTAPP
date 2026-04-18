@@ -1,0 +1,497 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-01-16 00:29:30.775863",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "received_date",
+  "status",
+  "column_break_1",
+  "section_break_gift",
+  "gift_name",
+  "event",
+  "event_name",
+  "category",
+  "description",
+  "column_break_gift",
+  "barcode_value",
+  "occasion_received",
+  "section_break_attributes",
+  "gift_details",
+  "section_break_donor",
+  "donor",
+  "donor_type",
+  "donor_country",
+  "column_break_donor",
+  "donor_nationality",
+  "donor_contact_person",
+  "donor_phone",
+  "donor_email",
+  "section_break_coordinator",
+  "coordinator_name",
+  "coordinator_phone",
+  "column_break_coordinator",
+  "coordinator_email",
+  "coordinator_designation",
+  "section_break_transport",
+  "transport_method",
+  "transport_company",
+  "tracking_number",
+  "column_break_transport",
+  "source_location",
+  "source_contact",
+  "delivered_by",
+  "section_break_storage",
+  "warehouse",
+  "storage_location",
+  "column_break_storage",
+  "storage_date",
+  "current_location_type",
+  "section_break_media",
+  "gift_images",
+  "column_break_media",
+  "gift_documents",
+  "section_break_inventory",
+  "moved_to_inventory",
+  "gift_created",
+  "column_break_inventory",
+  "moved_on",
+  "moved_by",
+  "section_break_notes",
+  "notes",
+  "rejection_reason",
+  "section_break_received_by",
+  "received_by_name",
+  "received_by_designation",
+  "column_break_received",
+  "received_by_contact",
+  "received_by_email",
+  "section_break_received_location",
+  "received_at_location",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "GR-.YYYY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "GR-.YYYY.-.####",
+   "reqd": 1
+  },
+  {
+   "default": "now",
+   "fieldname": "received_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Received Date",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "default": "Received",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Received\nStored\nMoved to Inventory\nRejected"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_gift",
+   "fieldtype": "Section Break",
+   "label": "Gift Information"
+  },
+  {
+   "bold": 1,
+   "fieldname": "gift_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Gift Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "event",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Event",
+   "options": "Gift Event"
+  },
+  {
+   "fetch_from": "event.subject",
+   "fieldname": "event_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Category",
+   "options": "Gift Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_gift",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "barcode_value",
+   "fieldtype": "Data",
+   "label": "Barcode ID"
+  },
+  {
+   "fieldname": "occasion_received",
+   "fieldtype": "Select",
+   "label": "Occasion",
+   "options": "Birthday\nAnniversary\nOfficial Visit\nCeremony\nOther"
+  },
+  {
+   "fieldname": "section_break_attributes",
+   "fieldtype": "Section Break",
+   "label": "Gift Attributes"
+  },
+  {
+   "fieldname": "gift_details",
+   "fieldtype": "Table",
+   "label": "Attributes",
+   "options": "Gift Details"
+  },
+  {
+   "fieldname": "section_break_donor",
+   "fieldtype": "Section Break",
+   "label": "Donor Information"
+  },
+  {
+   "fieldname": "donor",
+   "fieldtype": "Data",
+   "label": "Donor"
+  },
+  {
+   "fieldname": "donor_type",
+   "fieldtype": "Select",
+   "label": "Donor Type",
+   "options": "Individual\nOrganization\nGovernment"
+  },
+  {
+   "fieldname": "donor_country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "column_break_donor",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "donor_nationality",
+   "fieldtype": "Data",
+   "label": "Nationality"
+  },
+  {
+   "fieldname": "donor_contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "donor_phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "donor_email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "section_break_coordinator",
+   "fieldtype": "Section Break",
+   "label": "Coordinator Information"
+  },
+  {
+   "fieldname": "coordinator_name",
+   "fieldtype": "Data",
+   "label": "Coordinator Name"
+  },
+  {
+   "fieldname": "coordinator_phone",
+   "fieldtype": "Data",
+   "label": "Coordinator Phone"
+  },
+  {
+   "fieldname": "column_break_coordinator",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "coordinator_email",
+   "fieldtype": "Data",
+   "label": "Coordinator Email"
+  },
+  {
+   "fieldname": "coordinator_designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "section_break_transport",
+   "fieldtype": "Section Break",
+   "label": "Transport & Delivery Information"
+  },
+  {
+   "fieldname": "transport_method",
+   "fieldtype": "Select",
+   "label": "Transport Method",
+   "options": "Air\nSea\nLand\nCourier\nHand Delivered"
+  },
+  {
+   "fieldname": "transport_company",
+   "fieldtype": "Data",
+   "label": "Transport Company"
+  },
+  {
+   "fieldname": "tracking_number",
+   "fieldtype": "Data",
+   "label": "Tracking Number"
+  },
+  {
+   "fieldname": "column_break_transport",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_location",
+   "fieldtype": "Small Text",
+   "label": "Source Location"
+  },
+  {
+   "fieldname": "source_contact",
+   "fieldtype": "Data",
+   "label": "Source Contact"
+  },
+  {
+   "fieldname": "delivered_by",
+   "fieldtype": "Data",
+   "label": "Delivered By"
+  },
+  {
+   "fieldname": "section_break_storage",
+   "fieldtype": "Section Break",
+   "label": "Storage Details"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Data",
+   "label": "Warehouse"
+  },
+  {
+   "fieldname": "storage_location",
+   "fieldtype": "Data",
+   "label": "Storage Location/Section"
+  },
+  {
+   "fieldname": "column_break_storage",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "storage_date",
+   "fieldtype": "Date",
+   "label": "Stored Since"
+  },
+  {
+   "fieldname": "current_location_type",
+   "fieldtype": "Select",
+   "label": "Location Type",
+   "options": "Warehouse\nFarm\nEvent\nIn Transit\nWith Recipient\nMaintenance Center\nOther"
+  },
+  {
+   "fieldname": "section_break_media",
+   "fieldtype": "Section Break",
+   "label": "Images & Documents"
+  },
+  {
+   "fieldname": "gift_images",
+   "fieldtype": "Table",
+   "label": "Gift Images",
+   "options": "Gift Images"
+  },
+  {
+   "fieldname": "column_break_media",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gift_documents",
+   "fieldtype": "Table",
+   "label": "Documents",
+   "options": "Gift Issue Documents"
+  },
+  {
+   "fieldname": "section_break_inventory",
+   "fieldtype": "Section Break",
+   "label": "Move to Main Inventory"
+  },
+  {
+   "default": "0",
+   "fieldname": "moved_to_inventory",
+   "fieldtype": "Check",
+   "label": "Moved to Inventory",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gift_created",
+   "fieldtype": "Link",
+   "label": "Gift Created",
+   "options": "Gift",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_inventory",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "moved_on",
+   "fieldtype": "Datetime",
+   "label": "Moved On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "moved_by",
+   "fieldtype": "Link",
+   "label": "Moved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  },
+  {
+   "depends_on": "eval:doc.status=='Rejected'",
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Gift Received",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Gift Received",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_received_by",
+   "fieldtype": "Section Break",
+   "label": "Received By Information"
+  },
+  {
+   "fieldname": "received_by_name",
+   "fieldtype": "Data",
+   "label": "Received By (Name)"
+  },
+  {
+   "fieldname": "received_by_designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "column_break_received",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "received_by_contact",
+   "fieldtype": "Data",
+   "label": "Contact Number",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "received_by_email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "section_break_received_location",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Physical location/address where gift was received",
+   "fieldname": "received_at_location",
+   "fieldtype": "Small Text",
+   "label": "Received At Location"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-01 22:42:04.789381",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Gift Received",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "gift_name",
+ "track_changes": 1
+}

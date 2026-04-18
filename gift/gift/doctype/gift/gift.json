@@ -1,0 +1,377 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": ".#######",
+ "creation": "2025-09-18 18:12:06.876580",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "gift_name",
+  "gift_id",
+  "event",
+  "event_name",
+  "uae_ring_number",
+  "event_history_section",
+  "gift_event_history",
+  "timeline_history_section",
+  "timeline_history",
+  "quantity",
+  "description",
+  "column_break_zjty",
+  "category",
+  "status",
+  "import_barcode",
+  "barcode",
+  "barcode_value",
+  "received_section",
+  "received_datetime",
+  "received_by_name",
+  "received_by_contact",
+  "section_break_mnow",
+  "table_gvlf",
+  "section_break_myld",
+  "gift_images",
+  "location_storage_section",
+  "current_location_type",
+  "warehouse",
+  "column_break_location",
+  "storage_location",
+  "location_contact_section",
+  "gift_documents",
+  "location_contact_person",
+  "location_contact_number",
+  "column_break_location2",
+  "location_address",
+  "location_history_section",
+  "gift_location_history",
+  "qr_code_section",
+  "qr_code_enabled",
+  "qr_code_value",
+  "column_break_qr",
+  "qr_code_image",
+  "scan_count",
+  "donor"
+ ],
+ "fields": [
+  {
+   "fieldname": "gift_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Gift Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gift_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Gift Code"
+  },
+  {
+   "description": "Which event owns this gift",
+   "fieldname": "event",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Event",
+   "options": "Gift Event"
+  },
+  {
+   "fetch_from": "event.subject",
+   "fieldname": "event_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "event_history_section",
+   "fieldtype": "Section Break",
+   "label": "Event History"
+  },
+  {
+   "fieldname": "gift_event_history",
+   "fieldtype": "Table",
+   "label": "Event Move History",
+   "options": "Gift Event History",
+   "read_only": 1
+  },
+  {
+   "fieldname": "timeline_history_section",
+   "fieldtype": "Section Break",
+   "label": "Gift Timeline History"
+  },
+  {
+   "fieldname": "timeline_history",
+   "fieldtype": "Table",
+   "label": "Timeline History",
+   "options": "Gift Timeline Entry",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_zjty",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "Gift Category"
+  },
+  {
+   "bold": 1,
+   "default": "Available",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Available\nReserved\nIssued\nIn Transit\nDelivered\nUnder Maintenance\nRetired"
+  },
+  {
+   "fieldname": "barcode",
+   "fieldtype": "Attach",
+   "label": "Barcode",
+   "read_only": 1
+  },
+  {
+   "fieldname": "barcode_value",
+   "fieldtype": "Data",
+   "label": "Barcode ID"
+  },
+  {
+   "fieldname": "received_section",
+   "fieldtype": "Section Break",
+   "label": "Receiving"
+  },
+  {
+   "fieldname": "received_datetime",
+   "fieldtype": "Datetime",
+   "label": "Received Date & Time"
+  },
+  {
+   "fieldname": "received_by_name",
+   "fieldtype": "Data",
+   "label": "Received By"
+  },
+  {
+   "fieldname": "received_by_contact",
+   "fieldtype": "Data",
+   "label": "Receiver Contact"
+  },
+  {
+   "fieldname": "section_break_myld",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "gift_images",
+   "fieldtype": "Table",
+   "label": "Gift Images",
+   "options": "Gift Images"
+  },
+  {
+   "fieldname": "section_break_mnow",
+   "fieldtype": "Section Break",
+   "label": "Gift Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_barcode",
+   "fieldtype": "Check",
+   "label": "Import Barcode"
+  },
+  {
+   "fieldname": "location_storage_section",
+   "fieldtype": "Section Break",
+   "label": "Location & Storage"
+  },
+  {
+   "default": "Warehouse",
+   "fieldname": "current_location_type",
+   "fieldtype": "Select",
+   "label": "Current Location Type",
+   "options": "Warehouse\nFarm\nEvent\nIn Transit\nWith Recipient\nMaintenance Center\nOther"
+  },
+  {
+   "depends_on": "eval:doc.current_location_type=='Warehouse'",
+   "fieldname": "warehouse",
+   "fieldtype": "Data",
+   "label": "Warehouse"
+  },
+  {
+   "fieldname": "column_break_location",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Specific location within warehouse (e.g., Aisle 5, Cage 12)",
+   "fieldname": "storage_location",
+   "fieldtype": "Data",
+   "label": "Storage Location/Section"
+  },
+  {
+   "fieldname": "location_contact_section",
+   "fieldtype": "Section Break",
+   "label": "Location Contact Details"
+  },
+  {
+   "fieldname": "location_contact_person",
+   "fieldtype": "Data",
+   "label": "Location Contact Person"
+  },
+  {
+   "fieldname": "location_contact_number",
+   "fieldtype": "Data",
+   "label": "Contact Number"
+  },
+  {
+   "fieldname": "column_break_location2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "location_address",
+   "fieldtype": "Small Text",
+   "label": "Location Address"
+  },
+  {
+   "fieldname": "location_history_section",
+   "fieldtype": "Section Break",
+   "label": "Location History"
+  },
+  {
+   "fieldname": "gift_location_history",
+   "fieldtype": "Table",
+   "label": "Location Movement History",
+   "options": "Gift Store",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qr_code_section",
+   "fieldtype": "Section Break",
+   "label": "QR Code for Interest Registration"
+  },
+  {
+   "default": "0",
+   "description": "Enable to allow people to scan QR and register interest",
+   "fieldname": "qr_code_enabled",
+   "fieldtype": "Check",
+   "label": "Enable QR Code Interest"
+  },
+  {
+   "fieldname": "qr_code_value",
+   "fieldtype": "Data",
+   "label": "QR Code Value",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_qr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "qr_code_image",
+   "fieldtype": "Attach Image",
+   "label": "QR Code Image",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "scan_count",
+   "fieldtype": "Int",
+   "label": "Total Scans",
+   "read_only": 1
+  },
+  {
+   "fieldname": "table_gvlf",
+   "fieldtype": "Table",
+   "options": "Gift Category Details"
+  },
+  {
+   "fieldname": "donor",
+   "fieldtype": "Data",
+   "label": "Donor"
+  },
+  {
+   "fieldname": "gift_documents",
+   "fieldtype": "Table",
+   "label": "Documents",
+   "options": "Gift Issue Documents"
+  },
+  {
+   "fieldname": "uae_ring_number",
+   "fieldtype": "Data",
+   "label": "UAE Ring Number"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-01 22:43:58.281315",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Gift",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Coordinator",
+   "share": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

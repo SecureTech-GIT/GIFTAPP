@@ -1,0 +1,90 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-18 15:16:42.190736",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transfer_date",
+  "from_location",
+  "from_warehouse",
+  "to_location",
+  "to_warehouse",
+  "reason",
+  "transferred_by",
+  "remarks",
+  "reference_document"
+ ],
+ "fields": [
+  {
+   "default": "now",
+   "fieldname": "transfer_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Transfer Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "from_location",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "From Location"
+  },
+  {
+   "fieldname": "from_warehouse",
+   "fieldtype": "Data",
+   "label": "From Warehouse",
+   "options": ""
+  },
+  {
+   "fieldname": "to_location",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "To Location"
+  },
+  {
+   "fieldname": "to_warehouse",
+   "fieldtype": "Data",
+   "label": "To Warehouse",
+   "options": ""
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Reason",
+   "options": "Initial Storage\nWarehouse Transfer\nEvent Display\nMaintenance\nDelivery\nReturn\nOther"
+  },
+  {
+   "default": "Administrator",
+   "fieldname": "transferred_by",
+   "fieldtype": "Link",
+   "label": "Transferred By",
+   "options": "User"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "reference_document",
+   "fieldtype": "Data",
+   "label": "Reference Document"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-18 15:16:42.190736",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Gift Store",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

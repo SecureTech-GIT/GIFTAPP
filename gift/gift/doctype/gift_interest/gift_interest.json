@@ -1,0 +1,251 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:GIFT-INT-{#####}",
+ "creation": "2025-09-21 15:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "gift",
+  "gift_name",
+  "column_break_gntq",
+  "interest_datetime",
+  "date",
+  "category",
+  "interest_details_section",
+  "gift_recipient",
+  "column_break_owner",
+  "guest_name",
+  "actions_section",
+  "interest_source",
+  "approval_status",
+  "approved_by",
+  "approved_on",
+  "converted_to_issue",
+  "event",
+  "event_name",
+  "conversion_date",
+  "interest_level",
+  "remarks",
+  "follow_up_status",
+  "is_deleted",
+  "deleted_by",
+  "deleted_on"
+ ],
+ "fields": [
+  {
+   "fieldname": "gift",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Gift",
+   "options": "Gift",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_gntq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "now",
+   "fieldname": "interest_datetime",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Interest Date & Time"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "interest_details_section",
+   "fieldtype": "Section Break",
+   "label": "Person Details"
+  },
+  {
+   "fieldname": "gift_recipient",
+   "fieldtype": "Link",
+   "label": "Gift Recipient",
+   "options": "Gift Recipient",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_owner",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "gift.gift_name",
+   "fetch_if_empty": 1,
+   "fieldname": "gift_name",
+   "fieldtype": "Read Only",
+   "label": "Gift Name"
+  },
+  {
+   "fetch_from": "gift.category",
+   "fetch_if_empty": 1,
+   "fieldname": "category",
+   "fieldtype": "Read Only",
+   "label": "Category"
+  },
+  {
+   "default": "Manual Entry",
+   "fieldname": "interest_source",
+   "fieldtype": "Select",
+   "label": "Interest Source",
+   "options": "QR Code Scan\nManual Entry\nEvent Registration\nWebsite\nPhone Call\nOther"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "approval_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Approval Status",
+   "options": "Pending\nApproved\nRejected"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approved_on",
+   "fieldtype": "Datetime",
+   "label": "Approved On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "event",
+   "fieldtype": "Link",
+   "label": "Event",
+   "options": "Gift Event",
+   "reqd": 0
+  },
+  {
+   "fetch_from": "event.subject",
+   "fieldname": "event_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event Name",
+   "read_only": 1
+  },
+  {
+   "default": "Interested",
+   "fieldname": "interest_level",
+   "fieldtype": "Select",
+   "label": "Interest Level",
+   "options": "Very Interested\nInterested\nJust Browsing\nReserved"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Text",
+   "label": "Remarks"
+  },
+  {
+   "default": "New",
+   "fieldname": "follow_up_status",
+   "fieldtype": "Select",
+   "label": "Follow-up Status",
+   "options": "New\nConverted to Issue\nClosed"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_deleted",
+   "fieldtype": "Check",
+   "label": "Is Deleted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "deleted_by",
+   "fieldtype": "Link",
+   "label": "Deleted By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "deleted_on",
+   "fieldtype": "Datetime",
+   "label": "Deleted On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actions_section",
+   "fieldtype": "Section Break",
+   "label": "Actions"
+  },
+  {
+   "fieldname": "converted_to_issue",
+   "fieldtype": "Link",
+   "label": "Converted to Issue",
+   "options": "Gift Issue",
+   "read_only": 1
+  },
+  {
+   "fieldname": "conversion_date",
+   "fieldtype": "Datetime",
+   "label": "Conversion Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "gift_recipient.owner_full_name",
+   "fieldname": "guest_name",
+   "fieldtype": "Data",
+   "label": "Guest Name"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-21 11:37:48.526594",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Gift Interest",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Coordinator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

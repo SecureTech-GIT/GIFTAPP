@@ -1,0 +1,108 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:category_name",
+ "creation": "2025-09-18 18:12:37.141903",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "category_name",
+  "description",
+  "category_attributes_section",
+  "category_attributes",
+  "category_type_section",
+  "category_type",
+  "requires_maintenance"
+ ],
+ "fields": [
+  {
+   "fieldname": "category_name",
+   "fieldtype": "Data",
+   "label": "Category Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "category_attributes_section",
+   "fieldtype": "Section Break",
+   "label": "Category Attributes Template"
+  },
+  {
+   "fieldname": "category_type_section",
+   "fieldtype": "Section Break",
+   "label": "Category Type"
+  },
+  {
+   "fieldname": "category_type",
+   "fieldtype": "Select",
+   "label": "Category Type",
+   "options": "Physical Item\nLivestock/Animal\nVehicle\nElectronics\nJewelry\nArtwork\nReal Estate\nOther"
+  },
+  {
+   "default": "0",
+   "description": "Check if items in this category need maintenance tracking",
+   "fieldname": "requires_maintenance",
+   "fieldtype": "Check",
+   "label": "Requires Regular Maintenance"
+  },
+  {
+   "description": "Define attributes that will be suggested for all gifts in this category",
+   "fieldname": "category_attributes",
+   "fieldtype": "Table",
+   "label": "Default Attributes for this Category",
+   "options": "Gift Category Details"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-01 22:43:47.295815",
+ "modified_by": "Administrator",
+ "module": "Gift",
+ "name": "Gift Category",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Event Coordinator",
+   "share": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,41 @@
+{
+ "actions": [],
+ "creation": "2026-02-14 16:35:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "category",
+  "category_name",
+  "available_count"
+ ],
+ "fields": [
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Category",
+   "options": "Gift Category",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "category.category_name",
+   "fieldname": "category_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Category Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "available_count",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Available Gifts",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-02-14 16:35:00.000000",
+ "module": "Gift",
+ "name": "Event Category Selection"
+}
