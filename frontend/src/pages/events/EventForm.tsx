@@ -361,6 +361,8 @@ export default function EventForm() {
   const [giftPage, setGiftPage] = useState(1);
   const [giftLimit, setGiftLimit] = useState(20);
   const [giftCategoryFilter, setGiftCategoryFilter] = useState<string>("");
+  const [isDrafting, setIsDrafting] = useState(false);
+
 
   const wizardTabs = useMemo(() => {
     return ["details", "gifts"];
@@ -694,48 +696,95 @@ export default function EventForm() {
     }
   };
 
-  const saveDraft = async () => {
-    debugger;
-    if (isSaving || saveMutation.isPending) return;
-    const data = form.getValues();
-    setSaveMode("draft");
+  // const saveDraft = async () => {
+  //   debugger;
+  //   if (isSaving || saveMutation.isPending) return;
+  //   const data = form.getValues();
+  //   setSaveMode("draft");
 
-    if (id) {
-      saveMutation.mutate({
+  //   if (id) {
+  //     saveMutation.mutate({
+  //       ...(data as any),
+  //       status: draftStatusValue,
+  //     } as any);
+  //     return;
+  //   }
+  //   setIsSaving(true);
+  //   try {
+  //     const res = await EventAPI.createWithGifts(
+  //       {
+  //         ...(data as any),
+  //         status: draftStatusValue,
+  //       },
+  //       queuedGiftAdds,
+  //       queuedNewGifts,
+  //     );
+  //     if (!res.success || !(res as any).data?.event) {
+  //       const errorMessage = res.error;
+  //       if (errorMessage && errorMessage.includes("MandatoryError")) {
+  //         toast.error(t("common.validationError"));
+  //       } else {
+  //         toast.error(errorMessage || t("events.failedToCreateEvent"));
+  //       }
+  //       return;
+  //     }
+  //     const createdName = (res as any).data.event;
+  //     setQueuedGiftAdds([]);
+  //     setQueuedNewGifts([]);
+  //     setSuppressUnsavedPrompt(true);
+  //     form.reset(form.getValues());
+  //     setTimeout(() => navigate(`/events/${createdName}`), 0);
+  //   } finally {
+  //     setIsSaving(false);
+  //   }
+  // };
+   const saveDraft = async () => {
+  console.log('beforeeee', !suppressUnsavedPrompt && form.formState.isDirty && !saveMutation.isPending);
+  if (isSaving || saveMutation.isPending) return;
+  
+  setIsDrafting(true); // Mark that we are in a draft save flow
+  const data = form.getValues();
+  setSaveMode("draft");
+
+  if (id) {
+    saveMutation.mutate({
+      ...(data as any),
+      status: draftStatusValue,
+    } as any);
+    setIsDrafting(false); // Once done, reset flag
+    return;
+  }
+  setIsSaving(true);
+  try {
+    const res = await EventAPI.createWithGifts(
+      {
         ...(data as any),
         status: draftStatusValue,
-      } as any);
+      },
+      queuedGiftAdds,
+      queuedNewGifts,
+    );
+    if (!res.success || !(res as any).data?.event) {
+      const errorMessage = res.error;
+      if (errorMessage && errorMessage.includes("MandatoryError")) {
+        toast.error(t("common.validationError"));
+      } else {
+        toast.error(errorMessage || t("events.failedToCreateEvent"));
+      }
+      setIsDrafting(false); // Reset flag if there is an error
       return;
     }
-    setIsSaving(true);
-    try {
-      const res = await EventAPI.createWithGifts(
-        {
-          ...(data as any),
-          status: draftStatusValue,
-        },
-        queuedGiftAdds,
-        queuedNewGifts,
-      );
-      if (!res.success || !(res as any).data?.event) {
-        const errorMessage = res.error;
-        if (errorMessage && errorMessage.includes("MandatoryError")) {
-          toast.error(t("common.validationError"));
-        } else {
-          toast.error(errorMessage || t("events.failedToCreateEvent"));
-        }
-        return;
-      }
-      const createdName = (res as any).data.event;
-      setQueuedGiftAdds([]);
-      setQueuedNewGifts([]);
-      setSuppressUnsavedPrompt(true);
-      form.reset(form.getValues());
-      setTimeout(() => navigate(`/events/${createdName}`), 0);
-    } finally {
-      setIsSaving(false);
-    }
-  };
+    const createdName = (res as any).data.event;
+    setQueuedGiftAdds([]);
+    setQueuedNewGifts([]);
+    setSuppressUnsavedPrompt(true);
+    form.reset(form.getValues());
+    setTimeout(() => navigate(`/events/${createdName}`), 0);
+  } finally {
+    setIsSaving(false);
+    setIsDrafting(false); // Ensure the flag is reset even if it fails
+  }
+};
 
   const publishEvent = async () => {
     // Validate all required fields for the first step
@@ -979,6 +1028,7 @@ export default function EventForm() {
 
   const { DialogComponent } = usePromptDialog({
     when:
+      !isDrafting && 
       !suppressUnsavedPrompt &&
       form.formState.isDirty &&
       !saveMutation.isPending,
@@ -1047,7 +1097,7 @@ export default function EventForm() {
         {/* ── Body ─────────────────────────────────────────────────────────────── */}
         <div className="flex-1">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={(e) => e.preventDefault()}>
               <div className="">
                 {/* ── Wizard Stepper ───────────────────────────────────────────────────── */}
                 <div className="grid grid-cols-1 gap-6">
@@ -1709,7 +1759,11 @@ export default function EventForm() {
                         <div className="flex items-center gap-2">
                           <button
                             type="button"
-                            onClick={saveDraft}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              saveDraft();
+                            }}
                             disabled={saveMutation.isPending || isSaving}
                             className="text-sm text-muted-foreground hover:text-foreground transition-colors underline-offset-2 hover:underline disabled:opacity-50"
                           >
