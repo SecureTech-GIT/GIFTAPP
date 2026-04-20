@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Plus, Edit, Trash2, MoreHorizontal, Search, Eye, Users, X } from "lucide-react";
+import { Plus, Edit, Trash2, MoreHorizontal, Search, Eye, Users, X, Grid3x3, List } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -51,7 +51,9 @@ export default function RecipientList() {
     useState<GiftRecipient | null>(null);
   const [nameSort, setNameSort] = useState<"asc" | "desc">("asc");
   const [deleteRecipientName, setDeleteRecipientName] = useState<string | null>(null);
-
+  const [viewMode, setViewMode] = useState<"grid" | "table">(
+  typeof window !== "undefined" && window.innerWidth < 768 ? "grid" : "table"
+);
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -143,49 +145,59 @@ export default function RecipientList() {
   return (
     <div className="space-y-6">
       <Card>
-        <CardContent className="pt-6 flex md:flex-row flex-col md:items-center gap-4">
-          
-          {/* Search */}
-          <div className="relative md:flex-1">
-            <Search className="ltr:absolute ltr:left-3 rtl:absolute rtl:right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder={t("recipients.placeholders.search")}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="ltr:pl-9 rtl:pr-9 ltr:pr-9 rtl:pl-9"
-            />
-            {debouncedSearch !== search ? (
-              <div className="ltr:absolute ltr:right-3 rtl:absolute rtl:left-3 top-1/2 -translate-y-1/2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary" />
-              </div>
-            ) : search ? (
-              <button
-                type="button"
-                onClick={() => setSearch("")}
-                className="ltr:absolute ltr:right-3 rtl:absolute rtl:left-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Clear search"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            ) : null}
-          </div>
+  <CardContent className="pt-6 flex md:flex-row flex-col md:items-center gap-4 justify-between">
 
-          {/* Button */}
-          <Button
-            variant="outline"
-            onClick={() => navigate("/recipients/new")}
-            className="whitespace-nowrap"
-          >
-            <Plus className="h-4 w-4 ltr:mr-2 rtl:ml-2" />
-            {t("recipients.buttons.add")}
-          </Button>
+    {/* LEFT: Search */}
+    <div className="relative md:flex-1">
+      <Search className="ltr:absolute ltr:left-3 rtl:right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      <Input
+        placeholder={t("recipients.placeholders.search")}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="ltr:pl-9 rtl:pr-9 ltr:pr-9 rtl:pl-9"
+      />
+    </div>
 
-        </CardContent>
-      </Card>
+    {/* RIGHT: Buttons */}
+    <div className="flex gap-2 justify-end w-full md:w-auto">
+
+      <Button
+        variant="outline"
+        onClick={() => navigate("/recipients/new")}
+        className="whitespace-nowrap"
+      >
+        <Plus className="h-4 w-4 ltr:mr-2 rtl:ml-2" />
+        {t("recipients.buttons.add")}
+      </Button>
+
+      {/* Toggle */}
+      <div className="flex gap-1">
+        <Button
+          variant={viewMode === "table" ? "underlined" : "ghost"}
+          size="icon"
+          onClick={() => setViewMode("table")}
+        >
+          <List className="h-4 w-4" />
+        </Button>
+
+        <Button
+          variant={viewMode === "grid" ? "underlined" : "ghost"}
+          size="icon"
+          onClick={() => setViewMode("grid")}
+        >
+          <Grid3x3 className="h-4 w-4" />
+        </Button>
+      </div>
+
+    </div>
+  </CardContent>
+</Card>
 
       <Card>
         <CardContent className="p-0">
-          <Table>
+          {viewMode === "table" ? (
+      <>
+        <Table>
             <TableHeader>
               <TableRow>
                 <TableHead
@@ -317,6 +329,75 @@ export default function RecipientList() {
               )}
             </TableBody>
           </Table>
+      </>
+    ) : (
+      <div className="p-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {recipients.map((r) => (
+    <div
+  key={r.name}
+  className="relative bg-card border border-border rounded-xl p-4 hover:shadow-md hover:border-primary/20 transition cursor-pointer"
+  onClick={() => openViewDialog(r)}
+>
+
+  {/* ✅ ACTION MENU TOP RIGHT */}
+  <div
+    className="absolute top-2 right-2"
+    onClick={(e) => e.stopPropagation()}
+  >
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <MoreHorizontal className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => openViewDialog(r)}>
+          <Eye className="h-4 w-4 mr-2" />
+          {t("common.view")}
+        </DropdownMenuItem>
+
+        {!isEventCoordinator || isAdmin || isEventManager ? (
+          <DropdownMenuItem
+            onClick={() => navigate(`/recipients/edit/${r.name}`)}
+          >
+            <Edit className="h-4 w-4 mr-2" />
+            {t("common.edit")}
+          </DropdownMenuItem>
+        ) : null}
+
+        {(isAdmin || isEventManager) && (
+          <DropdownMenuItem
+            onClick={() => setDeleteRecipientName(r.name)}
+            className="text-destructive"
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            {t("common.delete")}
+          </DropdownMenuItem>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  </div>
+
+  {/* CONTENT */}
+  <div className="space-y-2 pr-8">
+    <p className="font-semibold">{r.owner_full_name}</p>
+
+    <p className="text-sm text-muted-foreground">
+      {(r as any).coordinator_full_name || "-"}
+    </p>
+
+    <div className="text-xs text-muted-foreground">
+      {(r as any).coordinator_email || ""}
+      {(r as any).coordinator_mobile_no && (
+        <div>{(r as any).coordinator_mobile_no}</div>
+      )}
+    </div>
+  </div>
+
+</div>
+  ))}
+</div>)}
           {!isLoading && recipients.length > 0 && (
             <Pagination
               currentPage={currentPage}
